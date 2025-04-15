@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "router": "^2.2.0",
+    "Router": "^2.1.0"
+  }
+}
