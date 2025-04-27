@@ -38,5 +38,65 @@ const todosClientes = async () => {
     return await linhas;
 }
 
+//criando a função de inserir cliente
+//função ao ser chamada pede o nome, cpf e tipo do cliente
+const inserirCliente = async (nome, cpf, tipo) => {
+    //primeiro criamos uma variavel que vai chamar a função conectar e aguardar a concexao sem efetivada
+    //essa variavel consequentemente herda todas a funçoes e metodos para manipular nosso banco
+    const con = await conectar();
+
+    //criamos o comando SQL para inserir o cliente
+    const sql = 'INSERT INTO cliente (s_nome_cliente, s_cpf_cliente, i_tipo_cliente) VALUES (?,?,?)';
+
+    //colocamos os valores que serão colocados as chamar a função em um variavel
+    const valores = [nome, cpf, tipo];
+
+    //fazemos a query com o codigo sql passando os respectivos valores de "valores"
+    await con.query(sql, valores);
+
+    //console para informar que deu tudo certo
+    console.log("Cliente" + nome + "Inserido Com Sucesso!");
+}
+
+//criando a função de atualizar cliente
+//função ao ser chamada pede o nome, cpf, tipo do cliente e o id
+const atualizarCliente = async (nome, cpf, tipo, id) => {
+    //primeiro criamos uma variavel que vai chamar a função conectar e aguardar a concexao sem efetivada
+    //essa variavel consequentemente herda todas a funçoes e metodos para manipular nosso banco
+    const con = await conectar();
+
+    //criamos o comando SQL para inserir o cliente
+    const sql = 'UPDATE cliente SET s_nome_cliente=?, s_cpf_cliente=?, i_tipo_cliente=? WHERE i_cliente_cliente=?';
+
+    //colocamos os valores que serão colocados as chamar a função em um variavel
+    const valores = [nome, cpf, tipo, id];
+
+    //fazemos a query com o codigo sql passando os respectivos valores de "valores"
+    await con.query(sql, valores);
+
+    //console para informar que deu tudo certo
+    console.log("Cliente" + id + "Atualizado Com Sucesso!");
+}
+
+//criando a função de deletar cliente
+//função ao ser chamada pede o nome, cpf e tipo do cliente
+const deletarCliente = async (id) => {
+    //primeiro criamos uma variavel que vai chamar a função conectar e aguardar a concexao sem efetivada
+    //essa variavel consequentemente herda todas a funçoes e metodos para manipular nosso banco
+    const con = await conectar();
+
+    //criamos o comando SQL para inserir o cliente
+    const sql = 'DELETE FROM cliente WHERE i_cliente_cliente=?';
+
+    //colocamos os valores que serão colocados as chamar a função em um variavel
+    const valores = [id];
+
+    //fazemos a query com o codigo sql passando os respectivos valores de "valores"
+    await con.query(sql, valores);
+
+    //console para informar que deu tudo certo
+    console.log("Cliente" + id + "Deletado Com Sucesso!");
+}
+
 //ao final de tudo devemos exportar a funçao todos os clientes que será usada no index
-module.exports = {todosClientes};
+module.exports = {todosClientes, inserirCliente, atualizarCliente, deletarCliente};
