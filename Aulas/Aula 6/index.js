@@ -10,7 +10,7 @@ const app = express();
 //se a rota for / usa o arquivo de rotas
 app.use("/", rotas);
 
-//se a rota não for / ou for diferente, retorna iddo:
+//se a rota não for / ou for diferente, retorna isso:
 app.get("*", (required, resolve) => {
     resolve.send("CFB Cursos");
 })
