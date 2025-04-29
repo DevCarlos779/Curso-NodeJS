@@ -4,7 +4,7 @@ const uri = "mongodb+srv://carlosemanu779:15718950acl@cluster0.v0py6lk.mongodb.n
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    const func = async () => {
+const func = async () => {
 
     client.connect();
 
