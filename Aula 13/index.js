@@ -15,7 +15,7 @@ client.connect();
 const dbo = client.db('nodejscurso');
 
 //obj que quero mandar pra futura coleção que vou criar
-const obj = { curso: 'Curso de HTML e CSS', canal: 'Otavio' };
+const obj = { curso: 'Curso de Mongo', canal: 'CFB Cursos' };
 
 //variavel que armazena o nome da coleção
 const colecao = 'cursos';
