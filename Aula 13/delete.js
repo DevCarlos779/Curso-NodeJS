@@ -24,9 +24,10 @@ const func = async () => {
     //fiz essa query usando regex para excluir todos os itens que o nome termina com a letra "s"
     const query2 = {curso: /.t/};
 
-    await dbo.collection("cursos").deleteMany(query2, (erro,resultado) => {
+    await dbo.collection("cursos").deleteMany(query2,(erro,resultado) => {
         if(erro) throw erro;
-        console.log("cursos deletados");
+        //usei o deletedCount para contar quantos cursos foram deletados
+        console.log("curso(s) deletado(s)");
     });
 
     //imprimindo para verificar se o curso foi excluido

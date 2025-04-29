@@ -16,6 +16,11 @@ const dbo = client.db('nodejscurso');
 
 //obj que quero mandar pra futura coleção que vou criar
 const obj = { curso: 'Curso de Mongo', canal: 'CFB Cursos' };
+const obj2 = [
+    { curso: 'Curso de Node', canal: 'CFB Cursos' },
+    { curso: 'Curso de SQL', canal: 'CFB Cursos' },
+    { curso: 'Curso de HTML', canal: 'CFB Cursos' }
+]
 
 //variavel que armazena o nome da coleção
 const colecao = 'cursos';
@@ -25,6 +30,11 @@ dbo.collection(colecao).insertOne(obj);
 
 //informo que deu tudo certo
 console.log('Um novo curso inserido');
+
+dbo.collection(colecao).insertMany(obj2,async (erro, resultado) => {
+    if(erro) throw erro;
+    await console.log(resultado.insertedCount)
+});
 
 //finalizo a conexao do cliente
 client.close();
