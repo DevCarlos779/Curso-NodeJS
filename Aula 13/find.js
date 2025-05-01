@@ -35,6 +35,9 @@ const func = async () => {
     //find tranformando em array
     const res4 = await dbo.collection(colecao).find({canal: "CFB Cursos"}, {projection: {_id: 0}}).toArray();
 
+    //find com limite de respostas
+    const res5 = await dbo.collection(colecao).find({canal: "CFB Cursos"}, {projection: {_id: 0}}).limit(3).toArray();
+
     //imprimo o resultado da pesquisa
     console.log("find sem filtro");
     console.log(res);
@@ -50,6 +53,10 @@ const func = async () => {
 
     console.log("find com array");
     console.log(res4);
+    console.log("-----------");
+
+    console.log("find com limite de numero de respostas");
+    console.log(res5);
     console.log("-----------");
 
     client.close();
