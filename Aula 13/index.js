@@ -7,35 +7,43 @@ const uri = "mongodb+srv://carlosemanu779:15718950acl@cluster0.v0py6lk.mongodb.n
 //declaro o cliente
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const func = async() => {
 
-//conecto com o servidor
-client.connect();
 
-//crio o banco nodejscurso
-const dbo = client.db('nodejscurso');
 
-//obj que quero mandar pra futura coleção que vou criar
-const obj = { curso: 'Curso de Mongo', canal: 'CFB Cursos' };
-const obj2 = [
-    { curso: 'Curso de Node', canal: 'CFB Cursos' },
-    { curso: 'Curso de SQL', canal: 'CFB Cursos' },
-    { curso: 'Curso de HTML', canal: 'CFB Cursos' }
-]
+    //conecto com o servidor
+    await client.connect();
 
-//variavel que armazena o nome da coleção
-const colecao = 'cursos';
-    
-//crio a coleção e insiro o onjeto ja criado
-dbo.collection(colecao).insertOne(obj);
+    //crio o banco nodejscurso
+    const dbo = client.db('nodejscurso');
 
-//informo que deu tudo certo
-console.log('Um novo curso inserido');
+    //obj que quero mandar pra futura coleção que vou criar
+    const obj = { curso: 'Curso de Mongo', canal: 'CFB Cursos' };
+    const obj2 = [
+        { curso: 'Curso de Node', canal: 'CFB Cursos' },
+        { curso: 'Curso de SQL', canal: 'CFB Cursos' },
+        { curso: 'Curso de HTML', canal: 'CFB Cursos' }
+    ]
 
-dbo.collection(colecao).insertMany(obj2,async (erro, resultado) => {
-    if(erro) throw erro;
-    await console.log(resultado.insertedCount)
-});
+    //variavel que armazena o nome da coleção
+    const colecao = 'cursos';
+        
+    //crio a coleção e insiro o onjeto ja criado
+    await dbo.collection(colecao).insertOne(obj);
 
-//finalizo a conexao do cliente
-client.close();
+    //informo que deu tudo certo
+    console.log('Um novo curso inserido');
 
+    await dbo.collection(colecao).insertMany(obj2,async (erro, resultado) => {
+        if(erro) throw erro;
+        await console.log(resultado.insertedCount)
+    });
+
+    console.log('Vários cursos inseridos');
+
+    //finalizo a conexao do cliente
+    client.close();
+
+}
+
+func();
